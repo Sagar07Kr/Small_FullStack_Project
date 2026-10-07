@@ -17,7 +17,7 @@ function App() {
   // },[])
 
   async function getdata(){
-      const product = await fetch("http://localhost:3000/"); 
+      const product = await fetch("https://small-fullstack-project-kujd.onrender.com/"); 
       const dataa = await product.json();
       setdata(dataa);
     }
