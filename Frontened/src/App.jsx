@@ -1,33 +1,51 @@
-import React from 'react'
+
+import React, { useEffect, useState } from 'react';
 import Card from './Card';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 function App() {
   const [data, setdata] = useState([]);
 
+  useEffect(() => {
+    async function getdata() {
+      try {
+        const product = await fetch(
+          "https://small-fullstack-project-kujd.onrender.com/"
+        );
 
-  // useEffect(()=>{
-  //   async function getdata(){
-  //     const product = await fetch("http://localhost:3000/"); 
-  //     const dataa = await product.json();
-  //     setdata(dataa);
-  //   }
-  //   getdata();
-  // },[])
+        const dataa = await product.json();
 
-  async function getdata(){
-      const product = await fetch("https://small-fullstack-project-kujd.onrender.com/"); 
-      const dataa = await product.json();
-      setdata(dataa);
+        setdata(dataa);
+      } catch (error) {
+        console.log(error);
+      }
     }
-  getdata();
-  
+
+    getdata();
+  }, []);
+
   return (
-    <div>
-        <Card data = {data}></Card>
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#f5f5f5',
+        padding: '30px',
+        fontFamily: 'Arial, sans-serif'
+      }}
+    >
+      <h1
+        style={{
+          textAlign: 'center',
+          marginBottom: '30px',
+          color: '#222'
+        }}
+      >
+        Products
+      </h1>
+
+      <Card data={data} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
+
